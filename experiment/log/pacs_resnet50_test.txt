@@ -1,0 +1,11 @@
+Save name: my_pacs_experiment
+Loading dataset...
+Source domain: ['art_painting', 'cartoon', 'photo']
+Target domain: ['sketch']
+Known classes: ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house', 'person']
+Unknown classes: []
+Loading models...
+Network: resnet50
+Share Parameter: False
+Start Testing...
+Close-set acc: 0.8407

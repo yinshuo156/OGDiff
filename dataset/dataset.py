@@ -25,11 +25,14 @@ class SingleClassData(Dataset):
         self.load_dataset()
 
     def load_dataset(self):
-        class_to_idx = {self.class_name: self.classes_label}      
+        class_to_idx = {self.class_name: self.classes_label}   
+        print(f"Current root_dir is: {self.root_dir}")
+        print(f"Current domain is: {self.domain_name}")   
         path = os.path.join(self.root_dir, self.domain_name)
-
+        
+        print(f"Current path is: {path}")
         if not os.path.isdir(path):
-            raise ValueError("Domain \"{}\" does not exit.".format(self.domain_name))  
+            raise ValueError("Domain \"{}\" does not exist.".format(self.domain_name))  
 
         self.samples = make_dataset(path, class_to_idx, IMG_EXTENSIONS)
         self.length = len(self.samples)

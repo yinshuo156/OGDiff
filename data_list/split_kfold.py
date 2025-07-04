@@ -1,7 +1,7 @@
 import os
 import shutil
-root_dir = "path/to/PACS"
-instr_dir = "path/to/PACS_list"
+root_dir = "data/PACS"
+instr_dir = "data_list/PACS_list"
 modes = ["train", "crossval"]
 
 for mode in modes:

@@ -18,7 +18,7 @@ if __name__ == '__main__':
     parser.add_argument('--batch-size', type=int, default=128)
     parser.add_argument('--hits', type=int, default=30)
 
-    parser.add_argument('--save-dir', default='')
+    parser.add_argument('--save-dir', default='experiment')
     parser.add_argument('--save-name', default='demo')
     
     args = parser.parse_args()
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     if dataset is None:
         dataset = param['dataset']    
     if dataset == 'PACS':
-        root_dir = ''
+        root_dir = 'data/PACS'
         small_img = False
     elif dataset == 'OfficeHome':
         root_dir = ''

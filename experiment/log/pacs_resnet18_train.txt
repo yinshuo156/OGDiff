@@ -1,0 +1,125 @@
+GPU: 0,1,2,3
+Loading path...
+Save name: pacs_resnet18
+Save best test: False
+Save later: False
+Loading dataset...
+Group length: 1
+DataSet: PACS
+Source domain: ['art_painting', 'cartoon', 'photo']
+Target domain: ['sketch']
+Known classes: ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house', 'person']
+Unknown classes: []
+Batch size: 16
+Number of task(domain): 3
+Number of task(class): 3
+Tasks per step: [3, 3, 3]
+CrossVal: True
+Loading models...
+GPU: 0,1,2,3
+Loading path...
+Save name: pacs_resnet18
+Save best test: False
+Save later: False
+Loading dataset...
+Group length: 1
+DataSet: PACS
+Source domain: ['art_painting', 'cartoon', 'photo']
+Target domain: ['sketch']
+Known classes: ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house', 'person']
+Unknown classes: []
+Batch size: 16
+Number of task(domain): 3
+Number of task(class): 3
+Tasks per step: [3, 3, 3]
+CrossVal: True
+Loading models...
+Network: resnet18
+Number of epoch: 6000
+Optimize method: SGD
+Learning rate: 0.0002
+Meta learning rate: 0.01
+Without close set classifier: False
+Without binary classifier: False
+Share Parameter: False
+Start training...
+Epoch: 300 Acc: 0.9383 (Val)
+Epoch: 300 Acc: 0.7149 (Test)
+Current best val accuracy is 0.9383 (Test: [{'test_acc': '0.7149', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7149 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 600 Acc: 0.9594 (Val)
+Epoch: 600 Acc: 0.7440 (Test)
+Current best val accuracy is 0.9594 (Test: [{'test_acc': '0.7440', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7440 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 900 Acc: 0.9594 (Val)
+Epoch: 900 Acc: 0.7564 (Test)
+Current best val accuracy is 0.9594 (Test: [{'test_acc': '0.7440', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}, {'test_acc': '0.7564', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7564 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 1200 Acc: 0.9627 (Val)
+Epoch: 1200 Acc: 0.7796 (Test)
+Current best val accuracy is 0.9627 (Test: [{'test_acc': '0.7796', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7796 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 1500 Acc: 0.9627 (Val)
+Epoch: 1500 Acc: 0.7910 (Test)
+Current best val accuracy is 0.9627 (Test: [{'test_acc': '0.7796', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}, {'test_acc': '0.7910', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7910 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 1800 Acc: 0.9610 (Val)
+Epoch: 1800 Acc: 0.7821 (Test)
+Current best val accuracy is 0.9627 (Test: [{'test_acc': '0.7796', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}, {'test_acc': '0.7910', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7910 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 2100 Acc: 0.9659 (Val)
+Epoch: 2100 Acc: 0.7674 (Test)
+Current best val accuracy is 0.9659 (Test: [{'test_acc': '0.7674', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7910 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 2400 Acc: 0.9675 (Val)
+Epoch: 2400 Acc: 0.7776 (Test)
+Current best val accuracy is 0.9675 (Test: [{'test_acc': '0.7776', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7910 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 2700 Acc: 0.9659 (Val)
+Epoch: 2700 Acc: 0.7770 (Test)
+Current best val accuracy is 0.9675 (Test: [{'test_acc': '0.7776', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7910 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 3000 Acc: 0.9643 (Val)
+Epoch: 3000 Acc: 0.7786 (Test)
+Current best val accuracy is 0.9675 (Test: [{'test_acc': '0.7776', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7910 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 3300 Acc: 0.9610 (Val)
+Epoch: 3300 Acc: 0.7959 (Test)
+Current best val accuracy is 0.9675 (Test: [{'test_acc': '0.7776', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7959 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 3600 Acc: 0.9627 (Val)
+Epoch: 3600 Acc: 0.7931 (Test)
+Current best val accuracy is 0.9675 (Test: [{'test_acc': '0.7776', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7959 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 3900 Acc: 0.9627 (Val)
+Epoch: 3900 Acc: 0.7969 (Test)
+Current best val accuracy is 0.9675 (Test: [{'test_acc': '0.7776', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7969 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 4200 Acc: 0.9578 (Val)
+Epoch: 4200 Acc: 0.7905 (Test)
+Current best val accuracy is 0.9675 (Test: [{'test_acc': '0.7776', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7969 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 4500 Acc: 0.9643 (Val)
+Epoch: 4500 Acc: 0.7870 (Test)
+Current best val accuracy is 0.9675 (Test: [{'test_acc': '0.7776', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7969 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 4800 Acc: 0.9643 (Val)
+Epoch: 4800 Acc: 0.7888 (Test)
+Current best val accuracy is 0.9675 (Test: [{'test_acc': '0.7776', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7969 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 5100 Acc: 0.9594 (Val)
+Epoch: 5100 Acc: 0.7875 (Test)
+Current best val accuracy is 0.9675 (Test: [{'test_acc': '0.7776', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7969 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 5400 Acc: 0.9627 (Val)
+Epoch: 5400 Acc: 0.7928 (Test)
+Current best val accuracy is 0.9675 (Test: [{'test_acc': '0.7776', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7969 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 5700 Acc: 0.9610 (Val)
+Epoch: 5700 Acc: 0.7842 (Test)
+Current best val accuracy is 0.9675 (Test: [{'test_acc': '0.7776', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7969 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Epoch: 6000 Acc: 0.9627 (Val)
+Epoch: 6000 Acc: 0.7921 (Test)
+Current best val accuracy is 0.9675 (Test: [{'test_acc': '0.7776', 'oscr_c': '0.0000', 'oscr_b': '0.0000'}])
+Current best test accuracy is 0.7969 ([{'oscr_c': '0.0000', 'oscr_b': '0.0000'}])

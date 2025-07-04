@@ -103,13 +103,13 @@ if __name__ == '__main__':
     # parser.add_argument('--unknown-classes', nargs='+', default=[])
 
     parser.add_argument('--random-split', action='store_true')
-    parser.add_argument('--gpu', default='0')
+    parser.add_argument('--gpu', default='0,1,2,3')
     parser.add_argument('--batch-size', type=int, default=16)
     parser.add_argument('--task-d', type=int, default=3)
     parser.add_argument('--task-c', type=int, default=3)
     parser.add_argument('--task-per-step', nargs='+', type=int, default=[3, 3, 3])
 
-    parser.add_argument('--net-name', default='resnet50')
+    parser.add_argument('--net-name', default='resnet18')
     parser.add_argument('--optimize-method', default="SGD")
     parser.add_argument('--schedule-method', default='StepLR')
     parser.add_argument('--num-epoch', type=int, default=6000)
@@ -121,8 +121,8 @@ if __name__ == '__main__':
     parser.add_argument('--without-bcls', action='store_true')
     parser.add_argument('--share-param', action='store_true')
 
-    parser.add_argument('--save-dir', default='')
-    parser.add_argument('--save-name', default='demo')
+    parser.add_argument('--save-dir', default='./experiment')
+    parser.add_argument('--save-name', default='pacs_resnet18')
     parser.add_argument('--save-best-test', action='store_true')
     parser.add_argument('--save-later', action='store_true')
 
@@ -172,41 +172,41 @@ if __name__ == '__main__':
     crossval = True
 
     if dataset == 'PACS':
-        train_dir = ''
-        val_dir = ''
-        test_dir = ''
+        train_dir = 'data/PACS_train'
+        val_dir = 'data/PACS_crossval'
+        test_dir = 'data/PACS'
         sub_batch_size = batch_size // 2    
         small_img = False
-    elif dataset == 'OfficeHome':
-        train_dir = ''
-        val_dir = ''
-        test_dir = ''
-        sub_batch_size = batch_size // 2
-        small_img = False
-    elif dataset == "DigitsDG":
-        train_dir = ''
-        val_dir = ''
-        test_dir = ''
-        sub_batch_size = batch_size // 2
-        small_img = True
-    elif dataset == 'VLCS':
-        train_dir = ''
-        val_dir = ''
-        test_dir = ''
-        sub_batch_size = batch_size 
-        small_img = False
-    elif dataset == 'TerraIncognita':
-        train_dir = ''
-        val_dir = ''
-        test_dir = ''
-        sub_batch_size = batch_size
-        small_img = False
-    elif dataset == "DomainNet":
-        train_dir = ''
-        val_dir = ''
-        test_dir = ''
-        sub_batch_size = batch_size // 2
-        small_img = False
+    # elif dataset == 'OfficeHome':
+    #     train_dir = ''
+    #     val_dir = ''
+    #     test_dir = ''
+    #     sub_batch_size = batch_size // 2
+    #     small_img = False
+    # elif dataset == "DigitsDG":
+    #     train_dir = ''
+    #     val_dir = ''
+    #     test_dir = ''
+    #     sub_batch_size = batch_size // 2
+    #     small_img = True
+    # elif dataset == 'VLCS':
+    #     train_dir = ''
+    #     val_dir = ''
+    #     test_dir = ''
+    #     sub_batch_size = batch_size 
+    #     small_img = False
+    # elif dataset == 'TerraIncognita':
+    #     train_dir = ''
+    #     val_dir = ''
+    #     test_dir = ''
+    #     sub_batch_size = batch_size
+    #     small_img = False
+    # elif dataset == "DomainNet":
+    #     train_dir = ''
+    #     val_dir = ''
+    #     test_dir = ''
+    #     sub_batch_size = batch_size // 2
+    #     small_img = False
     
     
     log_path = os.path.join(save_dir, 'log', save_name + '_train.txt')
@@ -339,46 +339,70 @@ if __name__ == '__main__':
     task_pool = shuffle_list([(id, ig) for id in range(task_d) for ig in range(task_c)])
    
 
+    # 初始化快速参数列表，用于元学习
     fast_parameters = list(net.parameters())
+    # 将所有参数的fast属性置为None
     for weight in net.parameters():
         weight.fast = None
+    # 清空梯度
     net.zero_grad()
     
+    # 开始训练循环
     for epoch in range(num_epoch_before, num_epoch):
-
+        # 设置网络为训练模式
         net.train()
+        # 初始化任务计数器和步骤索引
         task_count = 0
         step_index = 0
+        # 初始化输入和标签的累加列表
         input_sum = []
         label_sum = []
 
+        # 遍历任务池中的每个任务
         for id, ig in task_pool:
+            # 获取当前任务的domain索引和group索引
             domain_index = domain_split[id]
             group_index = group_split[ig]
         
+            # 处理每个domain的数据
             for i in domain_index:
+                # 保持当前group的数据
                 domain_specific_loader[i].keep(group_index)
+                # 获取下一个batch的数据
                 input, label = domain_specific_loader[i].next(batch_size=batch_size//len(domain_index))
+                # 重置数据加载器
                 domain_specific_loader[i].reset()
 
+                # 将数据移动到设备上
                 input = input.to(device)
                 label = label.to(device)
+                # 累加输入和标签
                 input_sum.append(input)
                 label_sum.append(label)
                 
+            # 更新任务计数器
             task_count = (task_count + 1) % task_per_step[step_index]
+            # 如果完成当前步骤的所有任务
             if task_count == 0:
+                # 拼接所有输入和标签
                 input_sum = torch.cat(input_sum, dim=0)
                 label_sum = torch.cat(label_sum, dim=0)
 
+                # 前向传播
                 out_c, out_b = net.c_forward(x=input_sum)
+                # 调整输出形状
                 out_b = out_b.view(out_b.size(0), 2, -1)
+                # 计算损失
                 loss = criterion(out_c, label_sum) + ovaloss(out_b, label_sum)
+                # 根据任务数量缩放损失
                 loss *= task_per_step[step_index]
                 
+                # 计算梯度
                 grad = torch.autograd.grad(loss, fast_parameters, create_graph=False, allow_unused=True)
+                # 分离梯度
                 grad = [g.detach() if g is not None else g for g in grad] 
 
+                # 更新快速参数
                 fast_parameters = []
                 for k, weight in enumerate(net.parameters()):
                     if grad[k] is not None:
