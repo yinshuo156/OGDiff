@@ -1,0 +1,28 @@
+GPU: 0,1,2,3
+Loading path...
+Save name: demo_eval
+Save best test: False
+Save later: False
+Loading dataset...
+Group length: 1
+DataSet: PACS
+Source domain: ['art_painting', 'cartoon', 'photo']
+Target domain: ['sketch']
+Known classes: ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house', 'person']
+Unknown classes: []
+Batch size: 16
+Number of task(domain): 3
+Number of task(class): 3
+Tasks per step: [3, 3, 3]
+CrossVal: True
+Loading models...
+Epoch 1: loss=671.9317, cls=652.5158, rec=19.4159
+Train Acc: 0.2285
+Val Acc: 0.2338
+Epoch 2: loss=647.9794, cls=634.8483, rec=13.1311
+Train Acc: 0.2967
+Val Acc: 0.2987
+Epoch 3: loss=619.5245, cls=605.0337, rec=14.4907
+Train Acc: 0.3463
+Val Acc: 0.3571
+训练被用户中断（KeyboardInterrupt）！

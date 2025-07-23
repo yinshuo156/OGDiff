@@ -1,0 +1,7 @@
+Epoch 2: loss=645.9584, cls=632.4965, rec=13.4619
+Train Acc: 0.2818
+Val Acc: 0.2938
+Epoch 3: loss=623.1944, cls=608.6798, rec=14.5146
+Train Acc: 0.3131
+Val Acc: 0.3295
+训练被用户中断（KeyboardInterrupt）！

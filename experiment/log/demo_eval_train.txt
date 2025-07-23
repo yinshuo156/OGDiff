@@ -19529,3 +19529,75 @@ Epoch: 6000 - Generated weights for 2 diffusion-based linear layer(s).
 Epoch: 6000 Acc: 0.2110 (Val)
 Epoch: 6000 Acc: 0.0407 (Test)
 Training finished.
+GPU: 0,1,2,3
+Loading path...
+Save name: demo_eval
+Save best test: False
+Save later: False
+Loading dataset...
+Group length: 1
+DataSet: PACS
+Source domain: ['art_painting', 'cartoon', 'photo']
+Target domain: ['sketch']
+Known classes: ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house', 'person']
+Unknown classes: []
+Batch size: 16
+Number of task(domain): 3
+Number of task(class): 3
+Tasks per step: [3, 3, 3]
+CrossVal: True
+Loading models...
+GPU: 0,1,2,3
+Loading path...
+Save name: demo_eval
+Save best test: False
+Save later: False
+Loading dataset...
+Group length: 1
+DataSet: PACS
+Source domain: ['art_painting', 'cartoon', 'photo']
+Target domain: ['sketch']
+Known classes: ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house', 'person']
+Unknown classes: []
+Batch size: 16
+Number of task(domain): 3
+Number of task(class): 3
+Tasks per step: [3, 3, 3]
+CrossVal: True
+Loading models...
+GPU: 0,1,2,3
+Loading path...
+Save name: demo_eval
+Save best test: False
+Save later: False
+Loading dataset...
+Group length: 1
+DataSet: PACS
+Source domain: ['art_painting', 'cartoon', 'photo']
+Target domain: ['sketch']
+Known classes: ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house', 'person']
+Unknown classes: []
+Batch size: 16
+Number of task(domain): 3
+Number of task(class): 3
+Tasks per step: [3, 3, 3]
+CrossVal: True
+Loading models...
+GPU: 0,1,2,3
+Loading path...
+Save name: demo_eval
+Save best test: False
+Save later: False
+Loading dataset...
+Group length: 1
+DataSet: PACS
+Source domain: ['art_painting', 'cartoon', 'photo']
+Target domain: ['sketch']
+Known classes: ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house', 'person']
+Unknown classes: []
+Batch size: 16
+Number of task(domain): 3
+Number of task(class): 3
+Tasks per step: [3, 3, 3]
+CrossVal: True
+Loading models...

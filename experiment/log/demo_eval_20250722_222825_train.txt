@@ -1,0 +1,298 @@
+GPU: 0,1,2,3
+Loading path...
+Save name: demo_eval
+Save best test: False
+Save later: False
+Loading dataset...
+Group length: 1
+DataSet: PACS
+Source domain: ['art_painting', 'cartoon', 'photo']
+Target domain: ['sketch']
+Known classes: ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house', 'person']
+Unknown classes: []
+Batch size: 16
+Number of task(domain): 3
+Number of task(class): 3
+Tasks per step: [3, 3, 3]
+CrossVal: True
+Loading models...
+Epoch 1: loss=671.3093, cls=652.7352, rec=18.5740
+Train Acc: 0.2305
+Val Acc: 0.2419
+Epoch 2: loss=650.3435, cls=637.2778, rec=13.0658
+Train Acc: 0.2835
+Val Acc: 0.2630
+Epoch 3: loss=622.8185, cls=606.9732, rec=15.8454
+Train Acc: 0.3250
+Val Acc: 0.3068
+Epoch 4: loss=610.7158, cls=595.3913, rec=15.3244
+Train Acc: 0.3535
+Val Acc: 0.3750
+Epoch 5: loss=579.8330, cls=563.5846, rec=16.2485
+Train Acc: 0.3732
+Val Acc: 0.3945
+Epoch 6: loss=556.7832, cls=539.2693, rec=17.5139
+Train Acc: 0.4373
+Val Acc: 0.4107
+Epoch 7: loss=537.3758, cls=518.7492, rec=18.6266
+Train Acc: 0.4566
+Val Acc: 0.4269
+Epoch 8: loss=513.2236, cls=494.8167, rec=18.4069
+Train Acc: 0.4605
+Val Acc: 0.4578
+Epoch 9: loss=489.4092, cls=470.1254, rec=19.2839
+Train Acc: 0.4818
+Val Acc: 0.4773
+Epoch 10: loss=468.5128, cls=448.9339, rec=19.5789
+Train Acc: 0.5375
+Val Acc: 0.5195
+[Time] Epoch 10: 累计耗时 3.31 分钟 (198.5 秒)
+Epoch 11: loss=457.9084, cls=438.1536, rec=19.7549
+Train Acc: 0.5583
+Val Acc: 0.5779
+Epoch 12: loss=433.0184, cls=412.8084, rec=20.2100
+Train Acc: 0.5305
+Val Acc: 0.5244
+Epoch 13: loss=418.2874, cls=398.0198, rec=20.2676
+Train Acc: 0.6103
+Val Acc: 0.5812
+Epoch 14: loss=403.9265, cls=383.3892, rec=20.5373
+Train Acc: 0.6083
+Val Acc: 0.5584
+Epoch 15: loss=383.4792, cls=362.5685, rec=20.9107
+Train Acc: 0.6129
+Val Acc: 0.5974
+Epoch 16: loss=368.9765, cls=347.6613, rec=21.3151
+Train Acc: 0.6432
+Val Acc: 0.6266
+Epoch 17: loss=350.9715, cls=329.4087, rec=21.5628
+Train Acc: 0.6754
+Val Acc: 0.6169
+Epoch 18: loss=336.7121, cls=315.2450, rec=21.4672
+Train Acc: 0.6860
+Val Acc: 0.6542
+Epoch 19: loss=332.2710, cls=311.2577, rec=21.0134
+Train Acc: 0.6904
+Val Acc: 0.6380
+Epoch 20: loss=308.9738, cls=288.0067, rec=20.9670
+Train Acc: 0.7292
+Val Acc: 0.6834
+[Time] Epoch 20: 累计耗时 6.46 分钟 (387.5 秒)
+Epoch 21: loss=314.4082, cls=292.9913, rec=21.4168
+Train Acc: 0.7208
+Val Acc: 0.6575
+Epoch 22: loss=298.7045, cls=276.8950, rec=21.8095
+Train Acc: 0.7202
+Val Acc: 0.6672
+Epoch 23: loss=285.8160, cls=264.3378, rec=21.4782
+Train Acc: 0.7506
+Val Acc: 0.7078
+Epoch 24: loss=276.6202, cls=255.4939, rec=21.1263
+Train Acc: 0.7577
+Val Acc: 0.7110
+Epoch 25: loss=273.7288, cls=252.6290, rec=21.0998
+Train Acc: 0.7847
+Val Acc: 0.6981
+Epoch 26: loss=254.6655, cls=234.0860, rec=20.5795
+Train Acc: 0.7873
+Val Acc: 0.7094
+Epoch 27: loss=248.3074, cls=227.3337, rec=20.9738
+Train Acc: 0.8063
+Val Acc: 0.7159
+Epoch 28: loss=241.9311, cls=220.7035, rec=21.2275
+Train Acc: 0.8055
+Val Acc: 0.7516
+Epoch 29: loss=234.2880, cls=213.3794, rec=20.9086
+Train Acc: 0.8178
+Val Acc: 0.7403
+Epoch 30: loss=226.2050, cls=205.1830, rec=21.0220
+Train Acc: 0.7921
+Val Acc: 0.7256
+[Time] Epoch 30: 累计耗时 9.63 分钟 (578.0 秒)
+Epoch 31: loss=223.5793, cls=202.1018, rec=21.4775
+Train Acc: 0.8044
+Val Acc: 0.7143
+Epoch 32: loss=206.0503, cls=185.1708, rec=20.8795
+Train Acc: 0.8164
+Val Acc: 0.7192
+Epoch 33: loss=208.5789, cls=187.4280, rec=21.1508
+Train Acc: 0.8557
+Val Acc: 0.7403
+Epoch 34: loss=200.3766, cls=179.2731, rec=21.1035
+Train Acc: 0.8599
+Val Acc: 0.7662
+Epoch 35: loss=192.2485, cls=171.4690, rec=20.7795
+Train Acc: 0.8562
+Val Acc: 0.7516
+Epoch 36: loss=193.9400, cls=173.2109, rec=20.7291
+Train Acc: 0.8744
+Val Acc: 0.7744
+Epoch 37: loss=181.3624, cls=160.4513, rec=20.9111
+Train Acc: 0.8743
+Val Acc: 0.7549
+Epoch 38: loss=174.0110, cls=153.2716, rec=20.7394
+Train Acc: 0.8884
+Val Acc: 0.7581
+Epoch 39: loss=166.1478, cls=145.9352, rec=20.2126
+Train Acc: 0.8752
+Val Acc: 0.7662
+Epoch 40: loss=162.8846, cls=141.6958, rec=21.1888
+Train Acc: 0.8866
+Val Acc: 0.7532
+[Time] Epoch 40: 累计耗时 12.80 分钟 (767.8 秒)
+Epoch 41: loss=169.0795, cls=148.8194, rec=20.2602
+Train Acc: 0.8941
+Val Acc: 0.7792
+Epoch 42: loss=166.5957, cls=145.5852, rec=21.0105
+Train Acc: 0.9006
+Val Acc: 0.7808
+Epoch 43: loss=148.2477, cls=127.2700, rec=20.9777
+Train Acc: 0.8816
+Val Acc: 0.7549
+Epoch 44: loss=148.7070, cls=128.0759, rec=20.6311
+Train Acc: 0.9086
+Val Acc: 0.7825
+Epoch 45: loss=148.7147, cls=128.1877, rec=20.5270
+Train Acc: 0.8956
+Val Acc: 0.7679
+Epoch 46: loss=150.6679, cls=130.2901, rec=20.3777
+Train Acc: 0.8748
+Val Acc: 0.7532
+Epoch 47: loss=140.0957, cls=119.6907, rec=20.4050
+Train Acc: 0.8936
+Val Acc: 0.7516
+Epoch 48: loss=138.2224, cls=117.3603, rec=20.8621
+Train Acc: 0.9105
+Val Acc: 0.8019
+Epoch 49: loss=129.6613, cls=108.2304, rec=21.4309
+Train Acc: 0.9189
+Val Acc: 0.7955
+Epoch 50: loss=131.1760, cls=110.3556, rec=20.8204
+Train Acc: 0.9270
+Val Acc: 0.8003
+[Time] Epoch 50: 累计耗时 15.79 分钟 (947.4 秒)
+Epoch 51: loss=134.9335, cls=114.1343, rec=20.7992
+Train Acc: 0.9274
+Val Acc: 0.8003
+Epoch 52: loss=124.9873, cls=103.9103, rec=21.0771
+Train Acc: 0.9338
+Val Acc: 0.7857
+Epoch 53: loss=126.6802, cls=105.9587, rec=20.7215
+Train Acc: 0.9143
+Val Acc: 0.8036
+Epoch 54: loss=119.1219, cls=97.8415, rec=21.2804
+Train Acc: 0.9276
+Val Acc: 0.7873
+Epoch 55: loss=110.8916, cls=90.2963, rec=20.5953
+Train Acc: 0.8976
+Val Acc: 0.7403
+Epoch 56: loss=111.0777, cls=90.7416, rec=20.3361
+Train Acc: 0.9169
+Val Acc: 0.7808
+Epoch 57: loss=116.4818, cls=96.0722, rec=20.4095
+Train Acc: 0.9412
+Val Acc: 0.7873
+Epoch 58: loss=109.7437, cls=89.3326, rec=20.4110
+Train Acc: 0.9279
+Val Acc: 0.7679
+Epoch 59: loss=106.1963, cls=85.3928, rec=20.8035
+Train Acc: 0.9478
+Val Acc: 0.8084
+Epoch 60: loss=108.6407, cls=87.6755, rec=20.9652
+Train Acc: 0.9450
+Val Acc: 0.7987
+[Time] Epoch 60: 累计耗时 18.86 分钟 (1131.4 秒)
+Epoch 61: loss=102.7358, cls=82.3270, rec=20.4088
+Train Acc: 0.9436
+Val Acc: 0.7776
+Epoch 62: loss=100.2033, cls=79.5331, rec=20.6703
+Train Acc: 0.9379
+Val Acc: 0.7711
+Epoch 63: loss=105.1677, cls=83.7249, rec=21.4428
+Train Acc: 0.9474
+Val Acc: 0.7841
+Epoch 64: loss=106.2413, cls=85.7921, rec=20.4492
+Train Acc: 0.9437
+Val Acc: 0.8003
+Epoch 65: loss=103.4450, cls=82.4896, rec=20.9554
+Train Acc: 0.9263
+Val Acc: 0.7662
+Epoch 66: loss=97.8757, cls=77.3901, rec=20.4856
+Train Acc: 0.9493
+Val Acc: 0.7825
+Epoch 67: loss=98.1742, cls=77.9477, rec=20.2265
+Train Acc: 0.9566
+Val Acc: 0.7922
+Epoch 68: loss=89.9530, cls=69.6326, rec=20.3204
+Train Acc: 0.9215
+Val Acc: 0.7841
+Epoch 69: loss=91.8210, cls=70.6942, rec=21.1268
+Train Acc: 0.9401
+Val Acc: 0.7695
+Epoch 70: loss=96.4594, cls=75.9672, rec=20.4922
+Train Acc: 0.9581
+Val Acc: 0.7808
+[Time] Epoch 70: 累计耗时 21.99 分钟 (1319.7 秒)
+Epoch 71: loss=86.6046, cls=66.5681, rec=20.0365
+Train Acc: 0.9605
+Val Acc: 0.8068
+Epoch 72: loss=96.3293, cls=75.4564, rec=20.8729
+Train Acc: 0.9520
+Val Acc: 0.8019
+Epoch 73: loss=82.3274, cls=62.1511, rec=20.1763
+Train Acc: 0.9506
+Val Acc: 0.7971
+Epoch 74: loss=87.2887, cls=67.3032, rec=19.9855
+Train Acc: 0.9647
+Val Acc: 0.7922
+Epoch 75: loss=88.0911, cls=67.9605, rec=20.1306
+Train Acc: 0.9559
+Val Acc: 0.7938
+Epoch 76: loss=86.7245, cls=65.2332, rec=21.4912
+Train Acc: 0.9583
+Val Acc: 0.8036
+Epoch 77: loss=80.8943, cls=61.1153, rec=19.7791
+Train Acc: 0.9708
+Val Acc: 0.8231
+Epoch 78: loss=86.6355, cls=66.0523, rec=20.5832
+Train Acc: 0.9631
+Val Acc: 0.8149
+Epoch 79: loss=83.5236, cls=63.2649, rec=20.2587
+Train Acc: 0.9627
+Val Acc: 0.8166
+Epoch 80: loss=79.4594, cls=59.0340, rec=20.4255
+Train Acc: 0.9618
+Val Acc: 0.7906
+[Time] Epoch 80: 累计耗时 25.17 分钟 (1510.0 秒)
+Epoch 81: loss=81.3632, cls=60.9249, rec=20.4383
+Train Acc: 0.9656
+Val Acc: 0.8133
+Epoch 82: loss=78.4777, cls=57.7528, rec=20.7249
+Train Acc: 0.9647
+Val Acc: 0.8003
+Epoch 83: loss=77.5730, cls=57.6769, rec=19.8961
+Train Acc: 0.9658
+Val Acc: 0.8117
+Epoch 84: loss=91.3367, cls=70.2436, rec=21.0932
+Train Acc: 0.9546
+Val Acc: 0.7565
+Epoch 85: loss=77.6295, cls=57.4380, rec=20.1915
+Train Acc: 0.9533
+Val Acc: 0.7922
+Epoch 86: loss=78.8713, cls=59.1867, rec=19.6846
+Train Acc: 0.9511
+Val Acc: 0.7760
+Epoch 87: loss=70.2645, cls=49.9055, rec=20.3590
+Train Acc: 0.9660
+Val Acc: 0.7841
+Epoch 88: loss=71.4345, cls=51.3469, rec=20.0876
+Train Acc: 0.9689
+Val Acc: 0.8084
+Epoch 89: loss=71.4727, cls=51.7976, rec=19.6751
+Train Acc: 0.9732
+Val Acc: 0.7873
+Epoch 90: loss=73.0964, cls=52.2994, rec=20.7970
+Train Acc: 0.9638
+Val Acc: 0.7906
+[Time] Epoch 90: 累计耗时 28.24 分钟 (1694.2 秒)
+Epoch 91: loss=70.1379, cls=50.0553, rec=20.0827

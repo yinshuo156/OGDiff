@@ -5,6 +5,7 @@ import torch.nn.functional as F
 from torch.hub import load_state_dict_from_url
 from torchvision.models import ResNet18_Weights, ResNet50_Weights
 from torch.nn.parameter import Parameter
+import math
 
 from model.diff_grad import create_diffusion_for_linear_layer
 
@@ -477,6 +478,118 @@ class MutiClassifier_(nn.Module):
         x1 = x2.view(x.size(0), 2, -1)
         x1 = x1[:, 1, :]
         return x1, x2
+
+# ========== 新增：原型分类器 ===========
+class ProtoClassifier(nn.Module):
+    def __init__(self, feature_dim, num_classes):
+        super().__init__()
+        self.prototypes = nn.Parameter(torch.randn(num_classes, feature_dim))
+    def forward(self, x):
+        # x: (batch, feature_dim)
+        # 计算每个样本到每个 prototype 的距离（欧氏距离）
+        dists = torch.cdist(x, self.prototypes)  # (batch, num_classes)
+        return -dists
+
+# ========== 新增：多任务原型分类器，集成扩散模型 ===========
+class MutiProtoClassifier(nn.Module):
+    def __init__(self, net, num_classes, feature_dim, condition_dim, diffusion_config=None):
+        super().__init__()
+        self.net = net
+        self.num_classes = num_classes
+        self.condition_dim = condition_dim
+        self.proto_classifier = ProtoClassifier(feature_dim, num_classes)
+        # 扩散模型，输入/输出为 (num_classes, feature_dim)
+        self.diffusion_model = create_diffusion_for_linear_layer(
+            in_features=feature_dim,
+            out_features=num_classes,
+            condition_dim=condition_dim,
+            **(diffusion_config or {})
+        )
+    def forward(self, x):
+        x = self.net(x)
+        return self.proto_classifier(x)
+    # 生成并设置 prototype
+    def generate_and_set_prototypes(self, condition_vector, device, use_ema=True):
+        flat_proto = self.diffusion_model.sample(
+            batch_size=1,
+            device=device,
+            condition_vector=condition_vector.to(device),
+            use_ema=use_ema
+        ).squeeze(0)
+        self.proto_classifier.prototypes.data = flat_proto.view(self.num_classes, -1)
+    # 训练扩散模型
+    def train_diffusion_step(self, target_proto, condition_vector, optimizer_diffusion):
+        flat_target = target_proto.flatten().unsqueeze(0)
+        loss = self.diffusion_model(flat_target, condition_vector.unsqueeze(0))
+        optimizer_diffusion.zero_grad()
+        loss.backward()
+        torch.nn.utils.clip_grad_norm_(self.diffusion_model.parameters(), 1.0)
+        optimizer_diffusion.step()
+        self.diffusion_model.update_ema()
+        return loss.item()
+
+# ========== 新增：特征空间扩散模型 ===========
+class FeatureDiffusion(nn.Module):
+    def __init__(self, feature_dim, num_timesteps=100, hidden_dim=512, condition_dim=None):
+        super().__init__()
+        self.feature_dim = feature_dim
+        self.num_timesteps = num_timesteps
+        self.condition_dim = condition_dim
+        # MLP输入维度根据是否有condition调整
+        input_dim = feature_dim + 1 + (condition_dim if condition_dim else 0)
+        self.denoiser = nn.Sequential(
+            nn.Linear(input_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, feature_dim)
+        )
+
+    def forward(self, noisy_feature, t, condition=None):
+        # noisy_feature: [B, D], t: [B] or int, condition: [B, C] or None
+        if isinstance(t, int):
+            t = torch.full((noisy_feature.size(0), 1), t, device=noisy_feature.device, dtype=noisy_feature.dtype)
+        elif t.ndim == 1:
+            t = t.unsqueeze(1)
+        t_norm = t.float() / self.num_timesteps
+        inp = [noisy_feature, t_norm]
+        if condition is not None:
+            if condition.ndim == 1:
+                condition = condition.unsqueeze(0)
+            if condition.shape[0] != noisy_feature.shape[0]:
+                condition = condition.expand(noisy_feature.shape[0], -1)
+            inp.append(condition)
+        inp = torch.cat(inp, dim=1)
+        return self.denoiser(inp)
+
+    def q_sample(self, x_start, t, noise=None):
+        if noise is None:
+            noise = torch.randn_like(x_start)
+        beta = 0.02 + 0.98 * t.float() / self.num_timesteps
+        beta = beta.view(-1, 1)
+        return (1 - beta).sqrt() * x_start + beta.sqrt() * noise
+
+# ========== 新增：主网络，集成特征扩散 ===========
+class FeatureDiffusionNet(nn.Module):
+    def __init__(self, backbone, classifier, feature_dim, diffusion_steps=100, hidden_dim=512, condition_dim=None):
+        super().__init__()
+        self.backbone = backbone
+        self.classifier = classifier
+        self.feature_diffusion = FeatureDiffusion(feature_dim, num_timesteps=diffusion_steps, hidden_dim=hidden_dim, condition_dim=condition_dim)
+        self.diffusion_steps = diffusion_steps
+        self.condition_dim = condition_dim
+
+    def forward(self, x, t=None, noise=None, condition=None, return_feature=False):
+        feat = self.backbone(x)
+        B, D = feat.shape
+        if t is None:
+            t = torch.randint(0, self.diffusion_steps, (B,), device=feat.device)
+        if noise is None:
+            noise = torch.randn_like(feat)
+        noisy_feat = self.feature_diffusion.q_sample(feat, t, noise)
+        denoised_feat = self.feature_diffusion(noisy_feat, t, condition=condition)
+        logits = self.classifier(denoised_feat)
+        if return_feature:
+            return logits, feat, noisy_feat, denoised_feat, t, noise
+        return logits
 
 def resnet18_fast(pretrained=True, progress=True): # 重新添加 pretrained 参数以控制是否加载权重
     """ResNet-18 model from
