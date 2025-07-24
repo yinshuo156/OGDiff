@@ -1,0 +1,29 @@
+GPU: 0,1,2,3
+Loading path...
+Save name: demo_eval
+Save best test: False
+Save later: False
+Loading dataset...
+Group length: 1
+DataSet: PACS
+Source domain: ['art_painting', 'cartoon', 'photo']
+Target domain: ['sketch']
+Known classes: ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house', 'person']
+Unknown classes: []
+Batch size: 512
+Number of task(domain): 3
+Number of task(class): 3
+Tasks per step: [3, 3, 3]
+CrossVal: True
+Loading models...
+Epoch 1: loss=21.5387, cls=19.2694, rec=2.2693
+Train Acc: 0.1746
+Val Acc: 0.1818
+[EarlyStopping] 新最佳Val Acc: 0.1818 (epoch 1)
+Epoch 2: loss=19.5685, cls=19.2062, rec=0.3623
+Train Acc: 0.2080
+Val Acc: 0.2078
+[EarlyStopping] 新最佳Val Acc: 0.2078 (epoch 2)
+训练被用户中断（KeyboardInterrupt）！
+[Interrupt] 最佳模型已保存到: ./experiment/model/diffusion/demo_eval.tar
+最佳Val Acc: 0.2078 (epoch 2)

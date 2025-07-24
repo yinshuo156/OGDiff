@@ -54,7 +54,7 @@ def get_transform(instr, small_img=False, color_jitter=True, random_grayscale=Tr
         ])
 
 
-def get_dataloader(root_dir, domain, classes, batch_size, domain_class_dict=None, get_domain_label=True, get_class_label=True, instr="train", small_img=False, shuffle=True, drop_last=True, num_workers=4, split_rate=0.8, crossval=False):
+def get_dataloader(root_dir, domain, classes, batch_size, domain_class_dict=None, get_domain_label=True, get_class_label=True, instr="train", small_img=False, shuffle=True, drop_last=True, num_workers=4, split_rate=0.8, crossval=False, pin_memory=True):
     if not isinstance(domain, list): 
         domain = [domain]
 
@@ -74,13 +74,13 @@ def get_dataloader(root_dir, domain, classes, batch_size, domain_class_dict=None
         train_size = int(len(dataset)*split_rate)
         val_size = len(dataset) - train_size
         dataset, val = random_split(dataset, [train_size, val_size])
-        val_loader = DataLoader(val, batch_size=batch_size, shuffle=False, drop_last=False, num_workers=num_workers)
-    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, drop_last=drop_last, num_workers=num_workers)
+        val_loader = DataLoader(val, batch_size=batch_size, shuffle=False, drop_last=False, num_workers=num_workers, pin_memory=pin_memory)
+    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=shuffle, drop_last=drop_last, num_workers=num_workers, pin_memory=pin_memory)
     
     return dataloader, val_loader
 
 
-def get_domain_specific_dataloader(root_dir, domain, classes, group_length, batch_size, small_img, split_rate=0.8, crossval=False, val_workers=4):
+def get_domain_specific_dataloader(root_dir, domain, classes, group_length, batch_size, small_img, split_rate=0.8, crossval=False, val_workers=4, pin_memory=True):
     domain_specific_loader = []
     val_list = [] 
 
@@ -98,7 +98,7 @@ def get_domain_specific_dataloader(root_dir, domain, classes, group_length, batc
                 else:
                     scd = dataset
 
-                loader = DataLoader(dataset=scd, batch_size=batch_size, shuffle=True, drop_last=True, num_workers=1)
+                loader = DataLoader(dataset=scd, batch_size=batch_size, shuffle=True, drop_last=True, num_workers=1, pin_memory=pin_memory)
                 dataloader_list.append(loader)
         else:
             classes_partition = split_classes(classes_list=classes, index_list=[i for i in range(len(classes))], n=group_length)
@@ -113,12 +113,12 @@ def get_domain_specific_dataloader(root_dir, domain, classes, group_length, batc
                 else:
                     sdd = dataset
 
-                loader = DataLoader(dataset=sdd, batch_size=batch_size, shuffle=True, drop_last=True, num_workers=1)
+                loader = DataLoader(dataset=sdd, batch_size=batch_size, shuffle=True, drop_last=True, num_workers=1, pin_memory=pin_memory)
                 dataloader_list.append(loader)
         domain_specific_loader.append(ConnectedDataIterator(dataloader_list, batch_size=batch_size))
     val_loader = None
     if crossval and len(val_list) > 0:
-        val_loader = DataLoader(ConcatDataset(val_list), batch_size=batch_size, shuffle=False, drop_last=False, num_workers=val_workers)
+        val_loader = DataLoader(ConcatDataset(val_list), batch_size=batch_size, shuffle=False, drop_last=False, num_workers=val_workers, pin_memory=pin_memory)
     return domain_specific_loader, val_loader
 
     

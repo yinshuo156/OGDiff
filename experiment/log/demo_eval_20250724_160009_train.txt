@@ -495,3 +495,29 @@ Epoch 117: loss=146.8994, cls=127.1810, rec=19.7184
 Train Acc: 0.9051
 Val Acc: 0.8312
 [EarlyStopping] Val Acc未提升，已连续14轮
+Epoch 118: loss=150.5351, cls=131.7681, rec=18.7671
+Train Acc: 0.9007
+Val Acc: 0.8214
+[EarlyStopping] Val Acc未提升，已连续15轮
+Epoch 119: loss=148.4963, cls=129.1066, rec=19.3898
+Train Acc: 0.8892
+Val Acc: 0.8231
+[EarlyStopping] Val Acc未提升，已连续16轮
+Epoch 120: loss=144.3660, cls=124.8891, rec=19.4769
+Train Acc: 0.8985
+Val Acc: 0.8231
+[Time] Epoch 120: 累计耗时 58.28 分钟 (3496.8 秒)
+[EarlyStopping] Val Acc未提升，已连续17轮
+Epoch 121: loss=142.4465, cls=122.8540, rec=19.5925
+Train Acc: 0.9125
+Val Acc: 0.8360
+[EarlyStopping] Val Acc未提升，已连续18轮
+Epoch 122: loss=137.7735, cls=118.2024, rec=19.5710
+Train Acc: 0.9033
+Val Acc: 0.8506
+[EarlyStopping] Val Acc未提升，已连续19轮
+Epoch 123: loss=137.4480, cls=118.3586, rec=19.0894
+Train Acc: 0.8921
+Val Acc: 0.8442
+[EarlyStopping] Val Acc未提升，已连续20轮
+[EarlyStopping] 连续20轮Val Acc未提升，提前终止训练。最佳Val Acc: 0.8523 (epoch 103)

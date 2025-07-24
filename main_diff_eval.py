@@ -18,6 +18,7 @@ import types
 import os
 import csv
 import numpy as np
+from torch.amp import GradScaler, autocast
 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 torch.cuda.empty_cache()  # 释放所有空闲的缓存块
@@ -136,7 +137,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--random-split', action='store_true')
     parser.add_argument('--gpu', default='0,1,2,3')
-    parser.add_argument('--batch-size', type=int, default=16)
+    parser.add_argument('--batch-size', type=int, default=512)
     parser.add_argument('--task-d', type=int, default=3)
     parser.add_argument('--task-c', type=int, default=3)
     parser.add_argument('--task-per-step', nargs='+', type=int, default=[3, 3, 3])
@@ -146,7 +147,7 @@ if __name__ == '__main__':
     parser.add_argument('--schedule-method', default='StepLR')
     parser.add_argument('--num-epoch', type=int, default=6000)
     parser.add_argument('--eval-step', type=int, default=3)
-    parser.add_argument('--lr', type=float, default=2e-4) 
+    parser.add_argument('--lr', type=float, default=8e-4) 
     parser.add_argument('--meta-lr', type=float, default=1e-2)
     parser.add_argument('--nesterov', action='store_true')
     parser.add_argument('--without-cls', action='store_true')
@@ -319,12 +320,12 @@ if __name__ == '__main__':
  
     domain_specific_loader, val_k = get_domain_specific_dataloader(root_dir = train_dir, domain=source_domain, classes=known_classes, group_length=group_length, batch_size=sub_batch_size, small_img=small_img, crossval=crossval and random_split)
     if crossval and val_k == None:
-        val_k, *_ = get_dataloader(root_dir=val_dir, domain=source_domain, classes=known_classes, batch_size=batch_size, get_domain_label=False, get_class_label=True, instr="val", small_img=small_img, shuffle=False, drop_last=False, num_workers=4)
+        val_k, *_ = get_dataloader(root_dir=val_dir, domain=source_domain, classes=known_classes, batch_size=batch_size, get_domain_label=False, get_class_label=True, instr="val", small_img=small_img, shuffle=False, drop_last=False, num_workers=16)
 
  
-    test_k, *_ = get_dataloader(root_dir=test_dir, domain=target_domain, classes=known_classes, batch_size=batch_size, get_domain_label=False, get_class_label=True, instr="test", small_img=small_img, shuffle=False, drop_last=False, num_workers=4)
+    test_k, *_ = get_dataloader(root_dir=test_dir, domain=target_domain, classes=known_classes, batch_size=batch_size, get_domain_label=False, get_class_label=True, instr="test", small_img=small_img, shuffle=False, drop_last=False, num_workers=16)
     if len(unknown_classes) > 0:
-        test_u, *_ = get_dataloader(root_dir=test_dir, domain=target_domain, classes=unknown_classes, batch_size=batch_size, get_domain_label=False, get_class_label=False, instr="test", small_img=small_img, shuffle=False, drop_last=False, num_workers=4)   
+        test_u, *_ = get_dataloader(root_dir=test_dir, domain=target_domain, classes=unknown_classes, batch_size=batch_size, get_domain_label=False, get_class_label=False, instr="test", small_img=small_img, shuffle=False, drop_last=False, num_workers=16)   
     else:
         test_u = None
 
@@ -352,7 +353,7 @@ if __name__ == '__main__':
         small_img=small_img,
         shuffle=True,
         drop_last=True,
-        num_workers=4
+        num_workers=16
     )
 
     # 定义扩散模型配置 (可以从args传入或在此处硬编码)
@@ -390,9 +391,10 @@ if __name__ == '__main__':
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=num_epoch)
     criterion_cls = torch.nn.CrossEntropyLoss()
     criterion_rec = torch.nn.MSELoss()
+    scaler = GradScaler('cuda')
 
     # ========== 新训练循环 ===========
-    patience = 20  # 你可以根据需要调整
+    patience = 200  # 你可以根据需要调整
     best_val_acc = 0.0
     epochs_no_improve = 0
     best_epoch = 0
@@ -413,13 +415,15 @@ if __name__ == '__main__':
             total_loss, total_cls, total_rec = 0, 0, 0
             for batch in train_loader:  # 需保证train_loader输出(x, y)
                 x, y = batch[0].to(device), batch[1].to(device)
-                logits, feat, noisy_feat, denoised_feat, t, noise = net(x, return_feature=True)
-                loss_cls = criterion_cls(logits, y)
-                loss_rec = criterion_rec(denoised_feat, feat)
-                loss = loss_cls + loss_rec
+                with autocast('cuda'):
+                    logits, feat, noisy_feat, denoised_feat, t, noise = net(x, return_feature=True)
+                    loss_cls = criterion_cls(logits, y)
+                    loss_rec = criterion_rec(denoised_feat, feat)
+                    loss = loss_cls + loss_rec
                 optimizer.zero_grad()
-                loss.backward()
-                optimizer.step()
+                scaler.scale(loss).backward()
+                scaler.step(optimizer)
+                scaler.update()
                 total_loss += loss.item()
                 total_cls += loss_cls.item()
                 total_rec += loss_rec.item()
@@ -494,6 +498,7 @@ if __name__ == '__main__':
         # ========== 新增：中断时保存最佳模型及参数 ==========
         if best_val_acc > 0:
             # 保存当前最佳模型权重
+            os.makedirs(os.path.dirname(model_save_path), exist_ok=True)
             torch.save({
                 'model_state_dict': net.state_dict(),
                 'best_val_acc': best_val_acc,

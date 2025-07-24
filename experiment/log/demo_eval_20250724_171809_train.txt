@@ -1,0 +1,76 @@
+GPU: 0,1,2,3
+Loading path...
+Save name: demo_eval
+Save best test: False
+Save later: False
+Loading dataset...
+Group length: 1
+DataSet: PACS
+Source domain: ['art_painting', 'cartoon', 'photo']
+Target domain: ['sketch']
+Known classes: ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house', 'person']
+Unknown classes: []
+Batch size: 32
+Number of task(domain): 3
+Number of task(class): 3
+Tasks per step: [3, 3, 3]
+CrossVal: True
+Loading models...
+Epoch 1: loss=336.9355, cls=325.7852, rec=11.1503
+Train Acc: 0.2142
+Val Acc: 0.2192
+[EarlyStopping] 新最佳Val Acc: 0.2192 (epoch 1)
+Epoch 2: loss=329.7908, cls=324.8093, rec=4.9815
+Train Acc: 0.2022
+Val Acc: 0.2419
+[EarlyStopping] 新最佳Val Acc: 0.2419 (epoch 2)
+Epoch 3: loss=327.1715, cls=321.5132, rec=5.6583
+Train Acc: 0.2540
+Val Acc: 0.2825
+[EarlyStopping] 新最佳Val Acc: 0.2825 (epoch 3)
+Epoch 4: loss=323.3869, cls=317.0812, rec=6.3057
+Train Acc: 0.2680
+Val Acc: 0.2938
+[EarlyStopping] 新最佳Val Acc: 0.2938 (epoch 4)
+Epoch 5: loss=314.1189, cls=307.1944, rec=6.9245
+Train Acc: 0.3346
+Val Acc: 0.3490
+[EarlyStopping] 新最佳Val Acc: 0.3490 (epoch 5)
+Epoch 6: loss=306.1941, cls=299.1077, rec=7.0864
+Train Acc: 0.3300
+Val Acc: 0.3344
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 7: loss=298.5455, cls=291.5525, rec=6.9931
+Train Acc: 0.3447
+Val Acc: 0.3831
+[EarlyStopping] 新最佳Val Acc: 0.3831 (epoch 7)
+Epoch 8: loss=294.8645, cls=287.7207, rec=7.1437
+Train Acc: 0.3461
+Val Acc: 0.3782
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 9: loss=288.2532, cls=280.7704, rec=7.4827
+Train Acc: 0.3164
+Val Acc: 0.3555
+[EarlyStopping] Val Acc未提升，已连续2轮
+Epoch 10: loss=282.4439, cls=274.5714, rec=7.8725
+Train Acc: 0.3474
+Val Acc: 0.3377
+[Time] Epoch 10: 累计耗时 5.12 分钟 (307.0 秒)
+[EarlyStopping] Val Acc未提升，已连续3轮
+Epoch 11: loss=276.8362, cls=269.0625, rec=7.7737
+Train Acc: 0.3816
+Val Acc: 0.4091
+[EarlyStopping] 新最佳Val Acc: 0.4091 (epoch 11)
+Epoch 12: loss=269.1127, cls=260.8843, rec=8.2284
+Train Acc: 0.4018
+Val Acc: 0.4513
+[EarlyStopping] 新最佳Val Acc: 0.4513 (epoch 12)
+Epoch 13: loss=263.6605, cls=255.1237, rec=8.5369
+Train Acc: 0.4189
+Val Acc: 0.4318
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 14: loss=257.8864, cls=248.8939, rec=8.9925
+Train Acc: 0.4195
+Val Acc: 0.4432
+[EarlyStopping] Val Acc未提升，已连续2轮
+训练被用户中断（KeyboardInterrupt）！
