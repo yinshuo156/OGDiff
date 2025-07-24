@@ -1,79 +1,40 @@
-# MEDIC++
+# OGDiff
 
-### 1. Introduction
+This is the official repository for the paper **"Rethinking Open Set Domain Generalization: A Conditional Diffusion Perspective"**, which is currently **under review at AAAI**. The codebase provides a comprehensive implementation for conditional diffusion-based domain generalization in open set scenarios.
 
-This repository contains the implementation of the unreleased paper **Exploring Dualistic Meta-Learning to Enhance Domain Generalization in Open Set Scenarios**, entended from our *ICCV 2023* paper **Generalizable Decision Boundaries: Dualistic Meta-Learning for Open Set Domain Generalization**.
+## 1. Introduction
 
-![image-20231216120523727](imgs/image-20231216120523727.png)
+This repository implements a novel approach for open set domain generalization (DG) using conditional diffusion models. Our method is designed to enhance the generalization ability of models across unseen domains, especially under open set conditions where unknown classes may appear during testing.
 
-### 2. Dataset Construction (Optional)
+## 2. Features
+- **Conditional Diffusion for Feature Space**: Diffusion models are applied in the feature space to improve robustness and generalization.
+- 针对Diffusion方法的优化：简洁高效的特征拼接方法和可学习权重
+- 数据增强：在部分任务上Domain Aware的数据增强方法
+- Efficient Training: Supports large batch sizes, mixed precision (AMP), and advanced learning rate scheduling (CosineAnnealingLR).
 
-You can divide the dataset into two folders for training and validation. We provide reference code for automatically dividing data using official split in `data_list/split_kfold.py`.
 
-```python
-root_dir = "path/to/PACS"
-instr_dir = "path/to/PACS_data_list"
+## 3. Training
+
+Update the dataset paths in `main_diff_eval.py` if needed. Then run:
+```bash
+python main_diff_eval.py --source-domain photo cartoon art_painting --target-domain sketch --save-name my_exp --gpu 0
 ```
+**Key options:**
+- `--batch-size`: Batch size per iteration (default: 512, adjust based on GPU memory)
+- `--num-epoch`: Number of training epochs (default: 6000)
+- `--lr`: Learning rate (default: 8e-4 for large batch)
+- `--eval-step`: Evaluation frequency (default: 3)
+- `--save-later`: Save model in the last 15% of iterations
+- `--random-split`: If no validation set, use this to split from training data
 
-### 3. Train
+All logs and metrics will be saved in `./experiment/log/` and `./experiment/metrics/` with timestamped filenames.
 
-To run the training code, please update the path of the dataset in `main.py`:
+## 4. Evaluation
 
-```python
-if dataset == 'PACS':	
-    train_dir = 'path/to/PACS_train' # the folder of training data 
-	val_dir = 'path/to/PACS_val' # the folder of validation data 
-	test_dir = 'path/to/PACS_all' or ['path/to/PACS_train', 'path/to/PACS_val']
-```
 
-then simply run:
 
-```
-python main.py --source-domain ... --target-domain ... --save-name ... --gpu 0
-```
+## 5. Citation
+If you use this codebase or ideas from our work, please cite our paper (currently under review). Citation details will be provided upon publication.
 
-If there is no validation folder, please use the option *--random-split* to create the validation set.
-
-You can use *--save-later* to save the model in the last 15% iterations.
-
-### 4. DomainBed
-
-To simulate the DomainBed benchmark, please set transforms in `dataset/dataloader.py` as follows:
-
-```python
-if small_img == False:
-        img_tr = [transforms.RandomResizedCrop((224, 224), (0.7, 1.0))] # 0.7 for DomainBed, otherwise 0.8
-        
-if color_jitter:
-        img_tr.append(transforms.ColorJitter(brightness=0.3, contrast=0.3, saturation=0.3, hue=0.3)) # 0.3 for DomainBed, otherwise 0.4
-```
-
-then add options: 
-
-+ *--batch-size 12 (18 for DomainNet, the total batch size is this value times the number of tasks 9)*
-+ *--optimize-method Adam*
-+ *--num-epoch 5100 (15000 for DomainNet)*
-+ *--eval-step 300*
-+ *--lr 6e-6 (divide the default learning rate 5e-5 by the number of tasks 9)*
-+ *--without-bcls*
-
-```
-python main.py --source-domain ... --target-domain ... --save-name ... --gpu 0 --batch-size 12 --optimize-method Adam --num-epoch 5100 --eval-step 300 --lr 6e-6 --without-bcls
-```
-
-### 5. Evalution
-
-To run the evaluation code, please update the path of the dataset in `eval.py`:
-
-```python
-if dataset == 'PACS':
-        root_dir = 'path/to/PACS_all' or ['path/to/PACS_train', 'path/to/PACS_val']
-```
-
-then simply run:
-
-```
-python eval.py --hits ... --save-name ... --gpu 0
-```
-
-+ *--hits (check points for H-score)*
+## 6. Contact
+For questions or issues, please open an issue on GitHub or contact the authors.
