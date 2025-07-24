@@ -1,0 +1,519 @@
+GPU: 0,1,2,3
+Loading path...
+Save name: demo_eval
+Save best test: False
+Save later: False
+Loading dataset...
+Group length: 1
+DataSet: PACS
+Source domain: ['art_painting', 'cartoon', 'photo']
+Target domain: ['sketch']
+Known classes: ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house', 'person']
+Unknown classes: ['dog']
+Batch size: 16
+Number of task(domain): 3
+Number of task(class): 3
+Tasks per step: [3, 3, 3]
+CrossVal: True
+Loading models...
+Epoch 1: loss=671.8272, cls=652.5481, rec=19.2791
+Train Acc: 0.2392
+Val Acc: 0.2354
+[EarlyStopping] 新最佳Val Acc: 0.2354 (epoch 1)
+Epoch 2: loss=651.4929, cls=638.8855, rec=12.6074
+Train Acc: 0.2640
+Val Acc: 0.2776
+[EarlyStopping] 新最佳Val Acc: 0.2776 (epoch 2)
+Epoch 3: loss=628.0629, cls=613.1592, rec=14.9037
+Train Acc: 0.3040
+Val Acc: 0.2890
+[EarlyStopping] 新最佳Val Acc: 0.2890 (epoch 3)
+Epoch 4: loss=606.2129, cls=590.9245, rec=15.2884
+Train Acc: 0.3528
+Val Acc: 0.3555
+[EarlyStopping] 新最佳Val Acc: 0.3555 (epoch 4)
+Epoch 5: loss=579.3588, cls=562.5850, rec=16.7737
+Train Acc: 0.3654
+Val Acc: 0.3961
+[EarlyStopping] 新最佳Val Acc: 0.3961 (epoch 5)
+Epoch 6: loss=558.6822, cls=542.1905, rec=16.4917
+Train Acc: 0.4160
+Val Acc: 0.4237
+[EarlyStopping] 新最佳Val Acc: 0.4237 (epoch 6)
+Epoch 7: loss=536.1221, cls=518.6021, rec=17.5200
+Train Acc: 0.4006
+Val Acc: 0.3977
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 8: loss=519.0513, cls=501.0244, rec=18.0269
+Train Acc: 0.4384
+Val Acc: 0.4545
+[EarlyStopping] 新最佳Val Acc: 0.4545 (epoch 8)
+Epoch 9: loss=503.8868, cls=485.7968, rec=18.0899
+Train Acc: 0.5013
+Val Acc: 0.5114
+[EarlyStopping] 新最佳Val Acc: 0.5114 (epoch 9)
+Epoch 10: loss=475.6792, cls=457.0732, rec=18.6059
+Train Acc: 0.4590
+Val Acc: 0.4708
+[Time] Epoch 10: 累计耗时 3.22 分钟 (193.4 秒)
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 11: loss=457.2652, cls=437.9965, rec=19.2687
+Train Acc: 0.5656
+Val Acc: 0.5584
+[EarlyStopping] 新最佳Val Acc: 0.5584 (epoch 11)
+Epoch 12: loss=446.1905, cls=426.4584, rec=19.7321
+Train Acc: 0.5842
+Val Acc: 0.5601
+[EarlyStopping] 新最佳Val Acc: 0.5601 (epoch 12)
+Epoch 13: loss=424.1277, cls=403.5293, rec=20.5984
+Train Acc: 0.5932
+Val Acc: 0.5698
+[EarlyStopping] 新最佳Val Acc: 0.5698 (epoch 13)
+Epoch 14: loss=409.0345, cls=388.8683, rec=20.1662
+Train Acc: 0.6257
+Val Acc: 0.5877
+[EarlyStopping] 新最佳Val Acc: 0.5877 (epoch 14)
+Epoch 15: loss=397.9371, cls=377.7721, rec=20.1650
+Train Acc: 0.6178
+Val Acc: 0.6006
+[EarlyStopping] 新最佳Val Acc: 0.6006 (epoch 15)
+Epoch 16: loss=379.6742, cls=358.9384, rec=20.7358
+Train Acc: 0.6046
+Val Acc: 0.5552
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 17: loss=367.4828, cls=346.6272, rec=20.8557
+Train Acc: 0.6713
+Val Acc: 0.6347
+[EarlyStopping] 新最佳Val Acc: 0.6347 (epoch 17)
+Epoch 18: loss=357.3343, cls=335.8573, rec=21.4770
+Train Acc: 0.6910
+Val Acc: 0.6494
+[EarlyStopping] 新最佳Val Acc: 0.6494 (epoch 18)
+Epoch 19: loss=339.2160, cls=317.5218, rec=21.6942
+Train Acc: 0.7015
+Val Acc: 0.6737
+[EarlyStopping] 新最佳Val Acc: 0.6737 (epoch 19)
+Epoch 20: loss=319.3875, cls=298.1365, rec=21.2510
+Train Acc: 0.7213
+Val Acc: 0.6705
+[Time] Epoch 20: 累计耗时 6.63 分钟 (397.8 秒)
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 21: loss=307.0474, cls=285.6649, rec=21.3825
+Train Acc: 0.7263
+Val Acc: 0.6494
+[EarlyStopping] Val Acc未提升，已连续2轮
+Epoch 22: loss=299.4034, cls=278.6968, rec=20.7066
+Train Acc: 0.7377
+Val Acc: 0.7062
+[EarlyStopping] 新最佳Val Acc: 0.7062 (epoch 22)
+Epoch 23: loss=292.0673, cls=270.3506, rec=21.7168
+Train Acc: 0.7542
+Val Acc: 0.6688
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 24: loss=278.0911, cls=257.0619, rec=21.0292
+Train Acc: 0.7364
+Val Acc: 0.6883
+[EarlyStopping] Val Acc未提升，已连续2轮
+Epoch 25: loss=274.9696, cls=253.8908, rec=21.0788
+Train Acc: 0.7809
+Val Acc: 0.6997
+[EarlyStopping] Val Acc未提升，已连续3轮
+Epoch 26: loss=269.6249, cls=248.5539, rec=21.0710
+Train Acc: 0.8057
+Val Acc: 0.7078
+[EarlyStopping] 新最佳Val Acc: 0.7078 (epoch 26)
+Epoch 27: loss=254.2820, cls=232.9879, rec=21.2941
+Train Acc: 0.8090
+Val Acc: 0.7321
+[EarlyStopping] 新最佳Val Acc: 0.7321 (epoch 27)
+Epoch 28: loss=238.9820, cls=217.6252, rec=21.3568
+Train Acc: 0.7838
+Val Acc: 0.7078
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 29: loss=246.3423, cls=225.0067, rec=21.3356
+Train Acc: 0.7961
+Val Acc: 0.7110
+[EarlyStopping] Val Acc未提升，已连续2轮
+Epoch 30: loss=233.7492, cls=212.5819, rec=21.1672
+Train Acc: 0.8272
+Val Acc: 0.7321
+[Time] Epoch 30: 累计耗时 9.93 分钟 (595.8 秒)
+[EarlyStopping] Val Acc未提升，已连续3轮
+Epoch 31: loss=223.9513, cls=202.8584, rec=21.0929
+Train Acc: 0.8309
+Val Acc: 0.7630
+[EarlyStopping] 新最佳Val Acc: 0.7630 (epoch 31)
+Epoch 32: loss=213.4760, cls=192.3694, rec=21.1066
+Train Acc: 0.8485
+Val Acc: 0.7581
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 33: loss=208.1993, cls=187.3324, rec=20.8669
+Train Acc: 0.8489
+Val Acc: 0.7338
+[EarlyStopping] Val Acc未提升，已连续2轮
+Epoch 34: loss=205.4813, cls=184.3740, rec=21.1074
+Train Acc: 0.8531
+Val Acc: 0.7159
+[EarlyStopping] Val Acc未提升，已连续3轮
+Epoch 35: loss=199.8801, cls=179.7516, rec=20.1285
+Train Acc: 0.8636
+Val Acc: 0.7597
+[EarlyStopping] Val Acc未提升，已连续4轮
+Epoch 36: loss=192.3218, cls=171.7032, rec=20.6186
+Train Acc: 0.8632
+Val Acc: 0.7549
+[EarlyStopping] Val Acc未提升，已连续5轮
+Epoch 37: loss=177.8592, cls=157.2371, rec=20.6221
+Train Acc: 0.8803
+Val Acc: 0.7419
+[EarlyStopping] Val Acc未提升，已连续6轮
+Epoch 38: loss=183.5466, cls=163.0750, rec=20.4716
+Train Acc: 0.8783
+Val Acc: 0.7532
+[EarlyStopping] Val Acc未提升，已连续7轮
+Epoch 39: loss=173.9543, cls=153.1462, rec=20.8080
+Train Acc: 0.8752
+Val Acc: 0.7565
+[EarlyStopping] Val Acc未提升，已连续8轮
+Epoch 40: loss=173.1915, cls=151.7752, rec=21.4164
+Train Acc: 0.8761
+Val Acc: 0.7419
+[Time] Epoch 40: 累计耗时 13.41 分钟 (804.8 秒)
+[EarlyStopping] Val Acc未提升，已连续9轮
+Epoch 41: loss=165.0058, cls=143.8176, rec=21.1882
+Train Acc: 0.8965
+Val Acc: 0.7776
+[EarlyStopping] 新最佳Val Acc: 0.7776 (epoch 41)
+Epoch 42: loss=158.2112, cls=137.3056, rec=20.9056
+Train Acc: 0.8831
+Val Acc: 0.7419
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 43: loss=151.7041, cls=130.9365, rec=20.7676
+Train Acc: 0.8754
+Val Acc: 0.7386
+[EarlyStopping] Val Acc未提升，已连续2轮
+Epoch 44: loss=155.9386, cls=135.6276, rec=20.3111
+Train Acc: 0.8958
+Val Acc: 0.7792
+[EarlyStopping] 新最佳Val Acc: 0.7792 (epoch 44)
+Epoch 45: loss=147.0992, cls=126.2240, rec=20.8753
+Train Acc: 0.9011
+Val Acc: 0.7565
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 46: loss=156.9626, cls=136.1584, rec=20.8042
+Train Acc: 0.9004
+Val Acc: 0.7516
+[EarlyStopping] Val Acc未提升，已连续2轮
+Epoch 47: loss=145.7425, cls=124.8338, rec=20.9087
+Train Acc: 0.9103
+Val Acc: 0.7792
+[EarlyStopping] Val Acc未提升，已连续3轮
+Epoch 48: loss=128.0496, cls=107.4958, rec=20.5538
+Train Acc: 0.9261
+Val Acc: 0.7971
+[EarlyStopping] 新最佳Val Acc: 0.7971 (epoch 48)
+Epoch 49: loss=130.9287, cls=109.7774, rec=21.1513
+Train Acc: 0.9129
+Val Acc: 0.7727
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 50: loss=128.6627, cls=107.6425, rec=21.0202
+Train Acc: 0.9083
+Val Acc: 0.7581
+[Time] Epoch 50: 累计耗时 16.72 分钟 (1003.0 秒)
+[EarlyStopping] Val Acc未提升，已连续2轮
+Epoch 51: loss=127.7366, cls=106.7417, rec=20.9949
+Train Acc: 0.9366
+Val Acc: 0.7955
+[EarlyStopping] Val Acc未提升，已连续3轮
+Epoch 52: loss=126.1914, cls=105.1453, rec=21.0461
+Train Acc: 0.8941
+Val Acc: 0.7532
+[EarlyStopping] Val Acc未提升，已连续4轮
+Epoch 53: loss=127.1595, cls=105.9742, rec=21.1853
+Train Acc: 0.9213
+Val Acc: 0.7873
+[EarlyStopping] Val Acc未提升，已连续5轮
+Epoch 54: loss=125.8581, cls=104.4345, rec=21.4235
+Train Acc: 0.9270
+Val Acc: 0.7792
+[EarlyStopping] Val Acc未提升，已连续6轮
+Epoch 55: loss=122.9840, cls=102.4761, rec=20.5079
+Train Acc: 0.9228
+Val Acc: 0.7468
+[EarlyStopping] Val Acc未提升，已连续7轮
+Epoch 56: loss=118.8060, cls=97.5852, rec=21.2208
+Train Acc: 0.9191
+Val Acc: 0.7549
+[EarlyStopping] Val Acc未提升，已连续8轮
+Epoch 57: loss=117.8553, cls=97.0322, rec=20.8231
+Train Acc: 0.9355
+Val Acc: 0.7906
+[EarlyStopping] Val Acc未提升，已连续9轮
+Epoch 58: loss=115.6823, cls=94.6425, rec=21.0398
+Train Acc: 0.9318
+Val Acc: 0.7938
+[EarlyStopping] Val Acc未提升，已连续10轮
+Epoch 59: loss=113.7509, cls=93.2633, rec=20.4876
+Train Acc: 0.9342
+Val Acc: 0.7646
+[EarlyStopping] Val Acc未提升，已连续11轮
+Epoch 60: loss=107.8019, cls=87.3583, rec=20.4436
+Train Acc: 0.9276
+Val Acc: 0.7744
+[Time] Epoch 60: 累计耗时 20.02 分钟 (1201.4 秒)
+[EarlyStopping] Val Acc未提升，已连续12轮
+Epoch 61: loss=108.0237, cls=87.1252, rec=20.8985
+Train Acc: 0.9476
+Val Acc: 0.7646
+[EarlyStopping] Val Acc未提升，已连续13轮
+Epoch 62: loss=100.6470, cls=79.7000, rec=20.9470
+Train Acc: 0.9406
+Val Acc: 0.7987
+[EarlyStopping] 新最佳Val Acc: 0.7987 (epoch 62)
+Epoch 63: loss=97.5339, cls=76.6456, rec=20.8883
+Train Acc: 0.9274
+Val Acc: 0.7744
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 64: loss=100.1992, cls=80.4074, rec=19.7918
+Train Acc: 0.9386
+Val Acc: 0.7890
+[EarlyStopping] Val Acc未提升，已连续2轮
+Epoch 65: loss=100.7664, cls=80.4637, rec=20.3027
+Train Acc: 0.9414
+Val Acc: 0.7873
+[EarlyStopping] Val Acc未提升，已连续3轮
+Epoch 66: loss=105.6771, cls=84.3553, rec=21.3217
+Train Acc: 0.9489
+Val Acc: 0.7955
+[EarlyStopping] Val Acc未提升，已连续4轮
+Epoch 67: loss=95.3349, cls=74.6720, rec=20.6629
+Train Acc: 0.9491
+Val Acc: 0.7938
+[EarlyStopping] Val Acc未提升，已连续5轮
+Epoch 68: loss=104.9370, cls=83.1700, rec=21.7670
+Train Acc: 0.9491
+Val Acc: 0.7922
+[EarlyStopping] Val Acc未提升，已连续6轮
+Epoch 69: loss=87.2930, cls=66.5189, rec=20.7740
+Train Acc: 0.9603
+Val Acc: 0.7906
+[EarlyStopping] Val Acc未提升，已连续7轮
+Epoch 70: loss=96.9296, cls=76.6039, rec=20.3258
+Train Acc: 0.9493
+Val Acc: 0.7792
+[Time] Epoch 70: 累计耗时 23.37 分钟 (1402.2 秒)
+[EarlyStopping] Val Acc未提升，已连续8轮
+Epoch 71: loss=93.5103, cls=72.7562, rec=20.7541
+Train Acc: 0.9550
+Val Acc: 0.7922
+[EarlyStopping] Val Acc未提升，已连续9轮
+Epoch 72: loss=87.9044, cls=67.4110, rec=20.4935
+Train Acc: 0.9465
+Val Acc: 0.7744
+[EarlyStopping] Val Acc未提升，已连续10轮
+Epoch 73: loss=91.7950, cls=71.0431, rec=20.7519
+Train Acc: 0.9631
+Val Acc: 0.7938
+[EarlyStopping] Val Acc未提升，已连续11轮
+Epoch 74: loss=83.8142, cls=63.1282, rec=20.6860
+Train Acc: 0.9404
+Val Acc: 0.7841
+[EarlyStopping] Val Acc未提升，已连续12轮
+Epoch 75: loss=84.7383, cls=64.2965, rec=20.4418
+Train Acc: 0.9581
+Val Acc: 0.7630
+[EarlyStopping] Val Acc未提升，已连续13轮
+Epoch 76: loss=84.8812, cls=64.1626, rec=20.7186
+Train Acc: 0.9336
+Val Acc: 0.7565
+[EarlyStopping] Val Acc未提升，已连续14轮
+Epoch 77: loss=83.0114, cls=62.8008, rec=20.2105
+Train Acc: 0.9594
+Val Acc: 0.7727
+[EarlyStopping] Val Acc未提升，已连续15轮
+Epoch 78: loss=86.0985, cls=66.1591, rec=19.9394
+Train Acc: 0.9327
+Val Acc: 0.7484
+[EarlyStopping] Val Acc未提升，已连续16轮
+Epoch 79: loss=85.5259, cls=64.5082, rec=21.0177
+Train Acc: 0.9680
+Val Acc: 0.7922
+[EarlyStopping] Val Acc未提升，已连续17轮
+Epoch 80: loss=80.0469, cls=59.3697, rec=20.6773
+Train Acc: 0.9673
+Val Acc: 0.7906
+[Time] Epoch 80: 累计耗时 26.91 分钟 (1614.8 秒)
+[EarlyStopping] Val Acc未提升，已连续18轮
+Epoch 81: loss=84.7252, cls=64.6913, rec=20.0339
+Train Acc: 0.9730
+Val Acc: 0.8052
+[EarlyStopping] 新最佳Val Acc: 0.8052 (epoch 81)
+Epoch 82: loss=83.1064, cls=61.8650, rec=21.2414
+Train Acc: 0.9662
+Val Acc: 0.7955
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 83: loss=77.8091, cls=57.0231, rec=20.7860
+Train Acc: 0.9634
+Val Acc: 0.8117
+[EarlyStopping] 新最佳Val Acc: 0.8117 (epoch 83)
+Epoch 84: loss=83.1054, cls=63.1970, rec=19.9084
+Train Acc: 0.9561
+Val Acc: 0.7906
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 85: loss=81.9772, cls=61.5840, rec=20.3932
+Train Acc: 0.9616
+Val Acc: 0.7906
+[EarlyStopping] Val Acc未提升，已连续2轮
+Epoch 86: loss=76.1767, cls=56.0563, rec=20.1205
+Train Acc: 0.9608
+Val Acc: 0.7744
+[EarlyStopping] Val Acc未提升，已连续3轮
+Epoch 87: loss=77.5511, cls=56.2631, rec=21.2879
+Train Acc: 0.9603
+Val Acc: 0.7890
+[EarlyStopping] Val Acc未提升，已连续4轮
+Epoch 88: loss=76.3336, cls=55.3617, rec=20.9719
+Train Acc: 0.9588
+Val Acc: 0.7695
+[EarlyStopping] Val Acc未提升，已连续5轮
+Epoch 89: loss=69.3118, cls=48.6466, rec=20.6651
+Train Acc: 0.9509
+Val Acc: 0.7808
+[EarlyStopping] Val Acc未提升，已连续6轮
+Epoch 90: loss=79.2170, cls=59.0361, rec=20.1809
+Train Acc: 0.9529
+Val Acc: 0.7711
+[Time] Epoch 90: 累计耗时 30.54 分钟 (1832.1 秒)
+[EarlyStopping] Val Acc未提升，已连续7轮
+Epoch 91: loss=67.2905, cls=46.6854, rec=20.6051
+Train Acc: 0.9439
+Val Acc: 0.7744
+[EarlyStopping] Val Acc未提升，已连续8轮
+Epoch 92: loss=78.8137, cls=58.2196, rec=20.5941
+Train Acc: 0.9676
+Val Acc: 0.8084
+[EarlyStopping] Val Acc未提升，已连续9轮
+Epoch 93: loss=71.9261, cls=51.7445, rec=20.1816
+Train Acc: 0.9619
+Val Acc: 0.8068
+[EarlyStopping] Val Acc未提升，已连续10轮
+Epoch 94: loss=68.1727, cls=47.1503, rec=21.0225
+Train Acc: 0.9629
+Val Acc: 0.8036
+[EarlyStopping] Val Acc未提升，已连续11轮
+Epoch 95: loss=71.3763, cls=50.4474, rec=20.9289
+Train Acc: 0.9658
+Val Acc: 0.7906
+[EarlyStopping] Val Acc未提升，已连续12轮
+Epoch 96: loss=76.3069, cls=56.0502, rec=20.2567
+Train Acc: 0.9676
+Val Acc: 0.8149
+[EarlyStopping] 新最佳Val Acc: 0.8149 (epoch 96)
+Epoch 97: loss=76.4062, cls=55.7534, rec=20.6528
+Train Acc: 0.9627
+Val Acc: 0.7938
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 98: loss=76.5174, cls=56.2637, rec=20.2538
+Train Acc: 0.9656
+Val Acc: 0.7971
+[EarlyStopping] Val Acc未提升，已连续2轮
+Epoch 99: loss=70.7356, cls=50.3429, rec=20.3927
+Train Acc: 0.9676
+Val Acc: 0.8117
+[EarlyStopping] Val Acc未提升，已连续3轮
+Epoch 100: loss=72.5329, cls=51.8341, rec=20.6988
+Train Acc: 0.9708
+Val Acc: 0.8036
+[Time] Epoch 100: 累计耗时 34.05 分钟 (2043.1 秒)
+[EarlyStopping] Val Acc未提升，已连续4轮
+Epoch 101: loss=68.5521, cls=48.2686, rec=20.2835
+Train Acc: 0.9744
+Val Acc: 0.7841
+[EarlyStopping] Val Acc未提升，已连续5轮
+Epoch 102: loss=59.2475, cls=38.9464, rec=20.3012
+Train Acc: 0.9768
+Val Acc: 0.8198
+[EarlyStopping] 新最佳Val Acc: 0.8198 (epoch 102)
+Epoch 103: loss=64.7281, cls=44.6894, rec=20.0387
+Train Acc: 0.9759
+Val Acc: 0.8198
+[EarlyStopping] Val Acc未提升，已连续1轮
+Epoch 104: loss=69.4214, cls=49.3505, rec=20.0709
+Train Acc: 0.9728
+Val Acc: 0.8019
+[EarlyStopping] Val Acc未提升，已连续2轮
+Epoch 105: loss=59.7647, cls=39.4865, rec=20.2782
+Train Acc: 0.9675
+Val Acc: 0.8052
+[EarlyStopping] Val Acc未提升，已连续3轮
+Epoch 106: loss=65.8752, cls=45.3461, rec=20.5290
+Train Acc: 0.9502
+Val Acc: 0.7776
+[EarlyStopping] Val Acc未提升，已连续4轮
+Epoch 107: loss=67.6656, cls=47.2683, rec=20.3973
+Train Acc: 0.9693
+Val Acc: 0.7711
+[EarlyStopping] Val Acc未提升，已连续5轮
+Epoch 108: loss=60.7258, cls=40.8387, rec=19.8871
+Train Acc: 0.9750
+Val Acc: 0.7971
+[EarlyStopping] Val Acc未提升，已连续6轮
+Epoch 109: loss=68.2480, cls=48.2251, rec=20.0228
+Train Acc: 0.9395
+Val Acc: 0.7776
+[EarlyStopping] Val Acc未提升，已连续7轮
+Epoch 110: loss=71.2425, cls=50.9692, rec=20.2733
+Train Acc: 0.9693
+Val Acc: 0.7776
+[Time] Epoch 110: 累计耗时 37.83 分钟 (2269.6 秒)
+[EarlyStopping] Val Acc未提升，已连续8轮
+Epoch 111: loss=59.2412, cls=38.7404, rec=20.5009
+Train Acc: 0.9774
+Val Acc: 0.7987
+[EarlyStopping] Val Acc未提升，已连续9轮
+Epoch 112: loss=54.1126, cls=34.7048, rec=19.4078
+Train Acc: 0.9708
+Val Acc: 0.8019
+[EarlyStopping] Val Acc未提升，已连续10轮
+Epoch 113: loss=62.6499, cls=42.6573, rec=19.9926
+Train Acc: 0.9739
+Val Acc: 0.8019
+[EarlyStopping] Val Acc未提升，已连续11轮
+Epoch 114: loss=69.8588, cls=48.9608, rec=20.8981
+Train Acc: 0.9776
+Val Acc: 0.8036
+[EarlyStopping] Val Acc未提升，已连续12轮
+Epoch 115: loss=67.3811, cls=45.5903, rec=21.7908
+Train Acc: 0.9697
+Val Acc: 0.8068
+[EarlyStopping] Val Acc未提升，已连续13轮
+Epoch 116: loss=56.8166, cls=36.4819, rec=20.3347
+Train Acc: 0.9756
+Val Acc: 0.8084
+[EarlyStopping] Val Acc未提升，已连续14轮
+Epoch 117: loss=60.6319, cls=40.5164, rec=20.1155
+Train Acc: 0.9778
+Val Acc: 0.7955
+[EarlyStopping] Val Acc未提升，已连续15轮
+Epoch 118: loss=59.7881, cls=39.7924, rec=19.9957
+Train Acc: 0.9634
+Val Acc: 0.8036
+[EarlyStopping] Val Acc未提升，已连续16轮
+Epoch 119: loss=58.5566, cls=38.1803, rec=20.3764
+Train Acc: 0.9768
+Val Acc: 0.8068
+[EarlyStopping] Val Acc未提升，已连续17轮
+Epoch 120: loss=64.4595, cls=44.2844, rec=20.1750
+Train Acc: 0.9800
+Val Acc: 0.7808
+[Time] Epoch 120: 累计耗时 41.61 分钟 (2496.5 秒)
+[EarlyStopping] Val Acc未提升，已连续18轮
+Epoch 121: loss=61.9212, cls=40.8806, rec=21.0406
+Train Acc: 0.9719
+Val Acc: 0.7873
+[EarlyStopping] Val Acc未提升，已连续19轮
+Epoch 122: loss=64.3001, cls=43.8767, rec=20.4233
+Train Acc: 0.9768
+Val Acc: 0.7922
+[EarlyStopping] Val Acc未提升，已连续20轮
+[EarlyStopping] 连续20轮Val Acc未提升，提前终止训练。最佳Val Acc: 0.8198 (epoch 102)

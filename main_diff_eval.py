@@ -16,6 +16,8 @@ from util.log import log
 from util.util import *
 import types
 import os
+import csv
+import numpy as np
 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 torch.cuda.empty_cache()  # 释放所有空闲的缓存块
@@ -24,6 +26,22 @@ print("可用 GPU 数量:", torch.cuda.device_count())
 print("当前使用的 GPU:", torch.cuda.current_device())
 import os
 print(f"My Process ID is: {os.getpid()}")
+
+def compute_hscore(y_true, y_pred, known_class_set):
+    known_mask = np.isin(y_true, list(known_class_set))
+    unknown_mask = ~known_mask
+    acc_known = (y_pred[known_mask] == y_true[known_mask]).mean() if known_mask.sum() > 0 else 0
+    acc_unknown = (y_pred[unknown_mask] == y_true[unknown_mask]).mean() if unknown_mask.sum() > 0 else 0
+    if acc_known + acc_unknown == 0:
+        return 0.0
+    return 2 * acc_known * acc_unknown / (acc_known + acc_unknown)
+
+def compute_oscr(y_true, y_pred, known_class_set):
+    known_mask = np.isin(y_true, list(known_class_set))
+    unknown_mask = ~known_mask
+    tpr = (y_pred[known_mask] == y_true[known_mask]).mean() if known_mask.sum() > 0 else 0
+    fpr = (y_pred[unknown_mask] != y_true[unknown_mask]).mean() if unknown_mask.sum() > 0 else 0
+    return tpr - fpr
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -369,6 +387,7 @@ if __name__ == '__main__':
         net = nn.DataParallel(net) 
 
     optimizer = torch.optim.Adam(net.parameters(), lr=lr)
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=num_epoch)
     criterion_cls = torch.nn.CrossEntropyLoss()
     criterion_rec = torch.nn.MSELoss()
 
@@ -379,6 +398,16 @@ if __name__ == '__main__':
     best_epoch = 0
     try:
         start_time = time.time()
+        all_train_acc = []
+        all_val_acc = []
+        all_val_hscore = []
+        all_val_oscr = []
+        metrics_csv_path = os.path.join(save_dir, 'metrics', f'{save_name}_{now_str}_metrics.csv')
+        os.makedirs(os.path.dirname(metrics_csv_path), exist_ok=True)
+        with open(metrics_csv_path, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['Epoch', 'Train Acc', 'Val Acc', 'Val H-Score', 'Val OSCR'])
+
         for epoch in range(num_epoch):
             net.train()
             total_loss, total_cls, total_rec = 0, 0, 0
@@ -394,6 +423,7 @@ if __name__ == '__main__':
                 total_loss += loss.item()
                 total_cls += loss_cls.item()
                 total_rec += loss_rec.item()
+            scheduler.step()
             log(f"Epoch {epoch+1}: loss={total_loss:.4f}, cls={total_cls:.4f}, rec={total_rec:.4f}", log_path)
 
             # ========== 新增：每轮统计训练集准确率 ==========
@@ -409,19 +439,33 @@ if __name__ == '__main__':
             acc = correct / total if total > 0 else 0
             log(f"Train Acc: {acc:.4f}", log_path)
 
-            # ========== 新增：每轮统计验证集准确率 ==========
-            val_acc = None
+            # ========== 新增：每轮统计验证集准确率、H-Score、OSCR ==========
+            val_acc, val_hscore, val_oscr = None, None, None
             if 'val_k' in locals() and val_k is not None:
-                correct_val, total_val = 0, 0
+                y_true_all, y_pred_all = [], []
                 with torch.no_grad():
                     for batch in val_k:
                         x, y = batch[0].to(device), batch[1].to(device)
                         logits = net(x)
                         pred = logits.argmax(dim=1)
-                        correct_val += (pred == y).sum().item()
-                        total_val += y.size(0)
-                val_acc = correct_val / total_val if total_val > 0 else 0
+                        y_true_all.append(y.cpu().numpy())
+                        y_pred_all.append(pred.cpu().numpy())
+                y_true_all = np.concatenate(y_true_all)
+                y_pred_all = np.concatenate(y_pred_all)
+                val_acc = (y_pred_all == y_true_all).mean()
+                known_class_set = set(range(num_classes))
+                val_hscore = compute_hscore(y_true_all, y_pred_all, known_class_set)
+                val_oscr = compute_oscr(y_true_all, y_pred_all, known_class_set)
                 log(f"Val Acc: {val_acc:.4f}", log_path)
+            # 记录到列表
+            all_train_acc.append(acc)
+            all_val_acc.append(val_acc if val_acc is not None else 0)
+            all_val_hscore.append(val_hscore if val_hscore is not None else 0)
+            all_val_oscr.append(val_oscr if val_oscr is not None else 0)
+            # 写入csv
+            with open(metrics_csv_path, 'a', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow([epoch+1, acc, val_acc, val_hscore, val_oscr])
 
             # ========== 每10个epoch记录一次耗时 ==========
             if (epoch + 1) % 10 == 0:

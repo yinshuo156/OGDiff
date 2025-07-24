@@ -1,0 +1,43 @@
+GPU: 0,1,2,3
+Loading path...
+Save name: demo_eval
+Save best test: False
+Save later: False
+Loading dataset...
+Group length: 1
+DataSet: PACS
+Source domain: ['art_painting', 'cartoon', 'photo']
+Target domain: ['sketch']
+Known classes: ['dog', 'elephant', 'giraffe', 'guitar', 'horse', 'house', 'person']
+Unknown classes: ['dog']
+Batch size: 16
+Number of task(domain): 3
+Number of task(class): 3
+Tasks per step: [3, 3, 3]
+CrossVal: True
+Loading models...
+Epoch 1: loss=671.8676, cls=653.3352, rec=18.5323
+Train Acc: 0.1792
+Val Acc: 0.1867
+[EarlyStopping] 新最佳Val Acc: 0.1867 (epoch 1)
+Epoch 2: loss=660.9329, cls=651.9415, rec=8.9915
+Train Acc: 0.2252
+Val Acc: 0.2110
+[EarlyStopping] 新最佳Val Acc: 0.2110 (epoch 2)
+Epoch 3: loss=655.7273, cls=645.5698, rec=10.1574
+Train Acc: 0.2597
+Val Acc: 0.2597
+[EarlyStopping] 新最佳Val Acc: 0.2597 (epoch 3)
+Epoch 4: loss=640.9032, cls=628.9801, rec=11.9230
+Train Acc: 0.2820
+Val Acc: 0.3036
+[EarlyStopping] 新最佳Val Acc: 0.3036 (epoch 4)
+Epoch 5: loss=633.8402, cls=622.0938, rec=11.7464
+Train Acc: 0.2899
+Val Acc: 0.3117
+[EarlyStopping] 新最佳Val Acc: 0.3117 (epoch 5)
+Epoch 6: loss=625.8888, cls=613.4463, rec=12.4425
+Train Acc: 0.2974
+Val Acc: 0.3312
+[EarlyStopping] 新最佳Val Acc: 0.3312 (epoch 6)
+训练被用户中断（KeyboardInterrupt）！

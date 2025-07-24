@@ -569,27 +569,56 @@ class FeatureDiffusion(nn.Module):
 
 # ========== 新增：主网络，集成特征扩散 ===========
 class FeatureDiffusionNet(nn.Module):
-    def __init__(self, backbone, classifier, feature_dim, diffusion_steps=100, hidden_dim=512, condition_dim=None):
+    def __init__(self, backbone, classifier, feature_dim, diffusion_steps=100, hidden_dim=512, multi_scale=False, num_classes=None):
         super().__init__()
         self.backbone = backbone
+        self.multi_scale = multi_scale
+        if multi_scale:
+            self.feature_dims = [128, 256, 512]
+            self.feature_diffusions = nn.ModuleList([
+                FeatureDiffusion(dim, num_timesteps=diffusion_steps, hidden_dim=hidden_dim)
+                for dim in self.feature_dims
+            ])
+            self.diffusion_steps = diffusion_steps
+            assert num_classes is not None, 'num_classes must be provided for multi_scale.'
+            self.classifier = nn.Linear(sum(self.feature_dims), num_classes)
+            # 新增：每层一个可学习权重，初始化为1
+            self.scale_weights = nn.Parameter(torch.ones(len(self.feature_dims)))
+        else:
+            self.feature_diffusion = FeatureDiffusion(feature_dim, num_timesteps=diffusion_steps, hidden_dim=hidden_dim)
+            self.diffusion_steps = diffusion_steps
         self.classifier = classifier
-        self.feature_diffusion = FeatureDiffusion(feature_dim, num_timesteps=diffusion_steps, hidden_dim=hidden_dim, condition_dim=condition_dim)
-        self.diffusion_steps = diffusion_steps
-        self.condition_dim = condition_dim
 
-    def forward(self, x, t=None, noise=None, condition=None, return_feature=False):
-        feat = self.backbone(x)
-        B, D = feat.shape
-        if t is None:
-            t = torch.randint(0, self.diffusion_steps, (B,), device=feat.device)
-        if noise is None:
-            noise = torch.randn_like(feat)
-        noisy_feat = self.feature_diffusion.q_sample(feat, t, noise)
-        denoised_feat = self.feature_diffusion(noisy_feat, t, condition=condition)
-        logits = self.classifier(denoised_feat)
-        if return_feature:
-            return logits, feat, noisy_feat, denoised_feat, t, noise
-        return logits
+    def forward(self, x, t=None, noise=None, return_feature=False):
+        if self.multi_scale:
+            feats = self.backbone(x, return_multi=True)  # list of [B, D]
+            B = feats[0].shape[0]
+            if t is None:
+                t = torch.randint(0, self.diffusion_steps, (B,), device=feats[0].device)
+            if noise is None:
+                noise = [torch.randn_like(f) for f in feats]
+            noisy_feats = [fd.q_sample(f, t, n) for fd, f, n in zip(self.feature_diffusions, feats, noise)]
+            denoised_feats = [fd(nf, t) for fd, nf in zip(self.feature_diffusions, noisy_feats)]
+            # 新增：加权融合
+            scaled_feats = [w * f for w, f in zip(self.scale_weights, denoised_feats)]
+            concat_feat = torch.cat(scaled_feats, dim=1)
+            logits = self.classifier(concat_feat)
+            if return_feature:
+                return logits, feats, noisy_feats, denoised_feats, t, noise
+            return logits
+        else:
+            feat = self.backbone(x)
+            B, D = feat.shape
+            if t is None:
+                t = torch.randint(0, self.diffusion_steps, (B,), device=feat.device)
+            if noise is None:
+                noise = torch.randn_like(feat)
+            noisy_feat = self.feature_diffusion.q_sample(feat, t, noise)
+            denoised_feat = self.feature_diffusion(noisy_feat, t)
+            logits = self.classifier(denoised_feat)
+            if return_feature:
+                return logits, feat, noisy_feat, denoised_feat, t, noise
+            return logits
 
 def resnet18_fast(pretrained=True, progress=True): # 重新添加 pretrained 参数以控制是否加载权重
     """ResNet-18 model from
